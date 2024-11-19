@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/11294dd4-5827-49f8-ae9e-d5c9d8ab5411)# IT-project
+# IT-project
 
 ## Тема: Категоризация новостей с помощью чат-бота в Telegram
 
