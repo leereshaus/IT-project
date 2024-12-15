@@ -85,7 +85,7 @@ async def predict(file: UploadFile = File(...)):
 
     # Векторизация текста для модели SVM
     svm_input = vectorizer_svm.transform([text])
-    svm_prediction = model_svm.predict(svm_input)  # Исправлено: используем svm_input вместо xgb_input
+    svm_prediction = model_svm.predict(svm_input) 
     predictions["SVM"] = int(svm_prediction[0])  # Добавляем предсказание SVM
 
     return JSONResponse(content=predictions)
