@@ -13,8 +13,6 @@ from tensorflow.keras.layers import Embedding, LSTM, Dense, Conv1D, GlobalMaxPoo
 from tensorflow.keras.utils import to_categorical
 from tensorflow.keras.callbacks import EarlyStopping
 
-# from transformers import BertTokenizer, TFBertModel
-
 # 1. Загрузка данных
 file_path = 'data/prep_dataset.csv'
 data = pd.read_csv(file_path)  # Замените на путь к вашему файлу
@@ -47,25 +45,7 @@ y_train_one_hot = to_categorical(y_train, num_classes=num_classes)
 y_val_one_hot = to_categorical(y_val, num_classes=num_classes)
 y_test_one_hot = to_categorical(y_test, num_classes=num_classes)
 
-"""
-early_stopping = EarlyStopping(
-    monitor='val_loss', # Отслеживаем значение val_loss (потери на валидационной выборке)
-    patience=2,          # Сколько эпох ждать улучшения, прежде чем остановить обучение
-    restore_best_weights=True # Восстанавливаем веса модели, соответствующие лучшей эпохе
-)
-"""
-
 # Модель CNN
-"""
-def create_cnn_model():
-    model = Sequential()
-    model.add(Embedding(input_dim=len(tokenizer.word_index) + 1, output_dim=128, input_length=max_length))
-    model.add(Conv1D(filters=64, kernel_size=5, activation='relu'))
-    model.add(GlobalMaxPooling1D())
-    model.add(Dense(num_classes, activation='softmax'))
-    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-    return model
-"""
 def create_cnn_model():
     model = Sequential()
     model.add(Embedding(input_dim=len(tokenizer.word_index) + 1, output_dim=128, input_length=max_length))
