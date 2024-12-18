@@ -1,0 +1,51 @@
+# !pip install pymorphy2
+
+import re
+import nltk
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+import pymorphy2
+morph = pymorphy2.MorphAnalyzer()
+
+
+# Открываем и читаем текстовый файл
+#file_path = 'path/to/your/file.txt'
+
+with open('1.txt', 'r', encoding='utf-8') as file:
+    text = file.read()
+
+import re
+import nltk
+from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
+import pymorphy2
+morph = pymorphy2.MorphAnalyzer()
+
+# Загрузка необходимых ресурсов
+nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('wordnet')
+nltk.download('punkt_tab')
+
+# Приведение текста к нижнему регистру
+text = text.lower()
+
+# Удаление специальных символов и цифр
+text = re.sub(r'[^а-яё\s]', '', text)
+
+# Токенизация
+tokens = text.split()
+
+# Удаление стоп-слов
+stop_words = set(stopwords.words('russian'))
+filtered_tokens = [word for word in tokens if word not in stop_words]
+
+# Лемматизация
+lemmatizer = WordNetLemmatizer()
+lemmatized_tokens = [morph.parse(word)[0].normal_form for word in filtered_tokens]
+
+# Результат
+print(lemmatized_tokens)
+
+with open('2.txt', 'w', encoding='utf-8') as file:
+    file.write(' '.join(lemmatized_tokens))
